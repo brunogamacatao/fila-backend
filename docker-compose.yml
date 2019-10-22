@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "senha_mysql"
+      MYSQL_DATABASE: "fila_db"
+    ports:
+      - 3306:3306
+    networks:
+      - fila-network
+  fila-backend:
+    image: fila-backend
+    ports:
+      - 8080:8080
+    networks:
+      - fila-network
+    depends_on:
+      - "mysqldb"
+networks: 
+  fila-network:
+    
